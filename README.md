@@ -1,113 +1,170 @@
 # 📘 Computer Networks
 
-This repository contains key practical implementations of core topics in **Computer Networks (CN)** — a foundational subject in computer science and engineering.  
-It includes programs and demonstrations for **protocol framing techniques, error detection, and data handling methods** typically covered in CN theory and lab sessions.
+This repository contains **core concepts and practical implementations of Computer Networks**, with a strong focus on the **Data Link Layer** and its **framing and error detection techniques**.
+
+The code and explanations here are aligned with **CN theory, labs, and exams**, making this repository useful for both **learning and revision**.
 
 ---
 
 ## 🧠 About Computer Networks
 
-A **Computer Network** is a system where multiple computing devices are connected to share resources and exchange information efficiently. Networks enable communication, resource sharing, remote access, and collaboration. Common examples include the Internet, Wi-Fi networks, LANs, and WANs. :contentReference[oaicite:0]{index=0}
+A **Computer Network** is a collection of interconnected devices that communicate and share data using well-defined protocols.  
+Computer Networks enable services such as file sharing, internet access, email, cloud computing, and distributed systems.
 
-### Core Concepts Covered in This Repo
-
-- **Framing and Data Transparency**  
-  Techniques that ensure data frames are correctly recognized and transmitted without confusion between actual data and control symbols. :contentReference[oaicite:1]{index=1}
-
-- **Error Detection**  
-  Methods to detect errors in transmitted data using checksum-style algorithms like CRC.
-
-- **Data Link Layer Essentials**  
-  Practical implementations of techniques used at the Data Link Layer (Layer 2) for reliable communication. :contentReference[oaicite:2]{index=2}
+Networks are commonly studied using the **OSI Model**, which divides communication into layers for better design and understanding.
 
 ---
 
-## 📁 Repository Contents
+## 📚 Focus of This Repository
 
-| Topic | Description |
-|-------|-------------|
-| **Byte / Character Stuffing** | Inserts escape bytes to protect special characters in frame data |
-| **Bit Stuffing** | Injects extra bits after sequences of consecutive 1’s to avoid flag confusion |
-| **CRC (Cyclic Redundancy Check)** | Generates and checks CRC values for error detection |
+This repository mainly focuses on the **Data Link Layer (Layer 2)** of the OSI Model, which is responsible for:
 
-Each topic includes both **sender** (transmission) and **receiver** (retrieval/verification) programs.
-
----
-
-## 🚀 Topics Explained (Quick Overview)
-
-### 📌 Byte / Character Stuffing
-Byte stuffing is used to maintain **frame boundaries**. Special control characters like `FLAG` and `ESC` are used to mark the start/end of a frame.  
-When the data contains any of these control characters, the escape (`ESC`) character is inserted before them so they are not mistaken for framing information. :contentReference[oaicite:3]{index=3}
+- Framing
+- Error detection
+- Reliable data transfer
+- Data transparency
 
 ---
 
-### 📌 Bit Stuffing
-Bit stuffing works at the **bit level**.  
-Whenever a specific bit pattern — usually a string of 1’s — reaches certain criteria (like five 1’s), an extra `0` bit is inserted to prevent confusion with frame delimiter patterns. :contentReference[oaicite:4]{index=4}
+## 🧩 Data Link Layer – Overview
+
+The **Data Link Layer** ensures that data sent from the sender reaches the receiver **without errors and in proper frame format**.
+
+### Key Responsibilities:
+- **Framing**: Dividing raw bit streams into manageable frames
+- **Error Detection**: Detecting transmission errors
+- **Data Transparency**: Ensuring control information does not interfere with actual data
+- **Flow Control**: Managing sender–receiver speed mismatch
 
 ---
 
-### 📌 CRC (Cyclic Redundancy Check)
-CRC is a robust error detection technique.  
-The sender treats data as a polynomial, divides it by a generator polynomial using **XOR operations**, and appends the remainder as a checksum. The receiver verifies this to detect transmission errors. :contentReference[oaicite:5]{index=5}
+## 🧷 Framing Techniques Covered
+
+Framing is the process of **grouping bits into frames** so the receiver can correctly identify the start and end of data.
+
+This repository covers the following **Data Link Layer framing techniques**:
 
 ---
 
-## 🛠️ How to Use
+### 📌 1. Byte / Character Stuffing
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/Siri-gh2/Computer-Networks.git
-Navigate to a topic folder (e.g., ByteStuffing).
+**Concept**  
+Special characters (such as FLAG and ESC) are used to mark the beginning and end of a frame.  
+If these characters appear in the data, an escape character is inserted before them.
 
-Compile and run the C++ sender and receiver programs.
+**Goal**
+- Maintain data transparency
+- Avoid confusion between data and control characters
 
-🎓 Learning Outcomes
+**Implementation**
+- Sender-side byte stuffing
+- Receiver-side de-stuffing
 
-By studying the code and concepts in this repo, you will learn:
+---
 
-Practical implementation of framing techniques
+### 📌 2. Bit Stuffing
 
-How data integrity checking works in real world
+**Concept**  
+Data is transmitted as bits.  
+To prevent the data from matching the frame delimiter pattern, a `0` is inserted after **five consecutive `1`s**.
 
-How to code network-oriented algorithms in C++
+**Goal**
+- Prevent accidental frame delimiter patterns inside data
+- Maintain synchronization in bit-oriented protocols (e.g., HDLC)
 
-⭐ Contributing
+**Implementation**
+- Bit stuffing at sender
+- Bit de-stuffing at receiver
 
-Contributions are welcome! You can add:
+---
 
-Dry runs for each topic
+### 📌 3. CRC (Cyclic Redundancy Check)
 
-Diagrams or flowcharts
+**Concept**  
+CRC is an **error detection technique** that treats data as a binary polynomial and performs division using XOR with a generator polynomial.
 
-More protocols like ARQ, Sliding Window, Routing Algorithms, etc.
+**Goal**
+- Detect transmission errors
+- Ensure data integrity
 
-📌 References
+**Implementation**
+- CRC generation at sender
+- CRC verification at receiver
 
-This repository and README are informed by standard Computer Networks tutorials and syllabus outlines covering OSI layers, framing mechanisms, and error control techniques. 
+---
+
+## 📁 Repository Structure
+
+```text
+Computer-Networks/
+│
+├── Byte-Stuffing.md
+├── Bit-Stuffing.md
+├── CRC.md
+├── README.md
+
+
+Each topic includes:
+
+Clear concept explanation
+
+Main objective
+
+Sender program
+
+Receiver program
+
+🛠️ Technologies Used
+
+Language: C++
+
+Concepts: OSI Model, Data Link Layer
+
+Focus: Framing & Error Detection
+
+🎯 Learning Outcomes
+
+By exploring this repository, you will understand:
+
+How framing is implemented in real networks
+
+The difference between byte-oriented and bit-oriented protocols
+
+How errors are detected during data transmission
+
+Practical C++ implementations of CN concepts
+
+📌 Future Enhancements
+
+Sliding Window Protocols
+
+Stop-and-Wait ARQ
+
+Go-Back-N ARQ
+
+Selective Repeat ARQ
+
+Network Layer routing algorithms
 
 📜 License
 
-This project is open source — feel free to use, modify, and share.
+This repository is open-source and intended for educational purposes.
+Feel free to use, modify, and improve it.
 
 
 ---
 
-### Real talk
-
+### Straight truth
 This README now:
+- ✅ Clearly mentions **Data Link Layer**
+- ✅ Explains **framing techniques properly**
+- ✅ Matches **CN exam theory**
+- ✅ Looks **serious on GitHub**
 
-- **Explains why the repo exists**
-- **Summarizes CN concepts clearly**
-- **Links content to theory**
-- Reads well on GitHub
+If you want next:
+- Add **diagrams section**
+- Add **OSI model explanation**
+- Convert this into **lab record style**
+- Review file naming & repo structure
 
-If you want, I can also generate:
-
-✔ A **table of contents with links to each `.md`**  
-✔ Dry run sections with visuals  
-✔ A **contributing guide**  
-
-Just tell me.
-::contentReference[oaicite:7]{index=7}
+Say the word.
